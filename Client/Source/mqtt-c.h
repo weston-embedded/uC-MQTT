@@ -226,6 +226,7 @@ typedef  enum  mqttc_err {
     MQTTc_ERR_SEL,                                              /* Generic Sel err.                                     */
     MQTTc_ERR_TIMEOUT,                                          /* Operation timed out.                                 */
     MQTTc_ERR_SOCK_FAIL,                                        /* Operation on sock failed.                            */
+    MQTTc_ERR_MSG_ID_NONE_AVAIL,                                /* No more msg ID avail.                                */
 } MQTTc_ERR;
 
 

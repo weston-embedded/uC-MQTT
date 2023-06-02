@@ -1317,6 +1317,10 @@ void  MQTTc_Publish (       MQTTc_CONN    *p_conn,
 
     if (qos_lvl > 0u) {                                         /* Obtain msg ID if QoS > 0.                            */
         msg_id = MQTTc_MsgID_Get();
+        if (msg_id == MQTT_MSG_ID_NONE) {
+           *p_err = MQTTc_ERR_MSG_ID_NONE_AVAIL;
+            return;
+        }
 
        *p_buf = (CPU_INT08U)(msg_id >> 8u);
         p_buf++;
@@ -1598,6 +1602,11 @@ void  MQTTc_SubscribeMult (       MQTTc_CONN   *p_conn,
     }
 
     msg_id = MQTTc_MsgID_Get();
+    if (msg_id == MQTT_MSG_ID_NONE) {
+      *p_err = MQTTc_ERR_MSG_ID_NONE_AVAIL;
+      return;
+    }
+
    *p_buf = (CPU_INT08U)(msg_id >> 8u);
     p_buf++;
    *p_buf = (CPU_INT08U)(msg_id & 0xFFu);
@@ -1804,6 +1813,11 @@ void  MQTTc_UnsubscribeMult (       MQTTc_CONN   *p_conn,
     }
 
     msg_id = MQTTc_MsgID_Get();                                 /* Obtain msg ID.                                       */
+    if (msg_id == MQTT_MSG_ID_NONE) {
+      *p_err = MQTTc_ERR_MSG_ID_NONE_AVAIL;
+      return;
+    }
+
    *p_buf = (CPU_INT08U)(msg_id >> 8u);
     p_buf++;
    *p_buf = (CPU_INT08U)(msg_id & 0xFFu);
